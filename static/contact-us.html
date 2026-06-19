@@ -666,6 +666,7 @@
             .nav-links { display: none !important; }
             .header {
                 padding: 18px 24px;
+                padding-top: max(18px, env(safe-area-inset-top));
                 margin: 8px;
                 border-radius: 16px;
                 flex-wrap: nowrap;
@@ -681,7 +682,7 @@
 
         /* ---- Extra small ≤480px ---- */
         @media (max-width: 480px) {
-            .header { margin: 5px; padding: 8px 10px; border-radius: 12px; }
+            .header { margin: 5px; padding: 8px 10px; padding-top: max(8px, env(safe-area-inset-top)); border-radius: 12px; }
             .header-title span { display: none; }
             .btn-logout { padding: 6px 9px; font-size: 0.76em; }
             .page-title { font-size: 1.3em; }

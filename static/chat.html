@@ -1754,6 +1754,7 @@
             /* Compact header */
             .header {
                 padding: 10px 12px;
+                padding-top: max(10px, env(safe-area-inset-top));
                 margin: 8px 8px 0;
                 border-radius: 16px;
                 gap: 6px;
@@ -1838,7 +1839,7 @@
 
             /* Input area */
             .chat-input-area {
-                padding: 10px 12px 12px 12px;
+                padding: 8px 12px 12px 12px;
                 padding-bottom: max(12px, env(safe-area-inset-bottom));
                 gap: 8px;
             }
@@ -1915,6 +1916,7 @@
             .header {
                 margin: 5px 5px 0;
                 padding: 8px 10px;
+                padding-top: max(8px, env(safe-area-inset-top));
             }
 
             .mobile-toggle-btn {

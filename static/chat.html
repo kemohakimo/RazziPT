@@ -1837,24 +1837,30 @@
             /* Chat history */
             .chat-history { padding: 12px; }
 
-            /* Input area */
+            /* Input area - improved mobile handling */
             .chat-input-area {
-                padding: 8px 12px 12px 12px;
+                padding: 8px 12px;
                 padding-bottom: max(12px, env(safe-area-inset-bottom));
                 gap: 8px;
+                flex-shrink: 0;
+                position: relative;
+                z-index: 10;
             }
 
             .input-row { gap: 8px; }
 
             #messageInput {
-                padding: 11px 14px;
-                font-size: 0.95em;
+                padding: 12px 14px;
+                font-size: 16px;
+                border-radius: 20px;
+                min-height: 44px;
             }
 
             .btn-send, .btn-clear {
-                padding: 10px 14px;
-                font-size: 0.88em;
-                border-radius: 12px;
+                padding: 11px 16px;
+                font-size: 0.9em;
+                border-radius: 14px;
+                min-height: 44px;
             }
 
             /* Welcome screen */
@@ -1888,6 +1894,7 @@
                 padding: 8px;
                 display: flex;
                 flex-direction: column;
+                position: relative;
             }
 
             .chat-container {
@@ -1895,6 +1902,7 @@
                 display: flex;
                 flex-direction: column;
                 height: 100%;
+                position: relative;
             }
 
             .chat-history {
@@ -1902,12 +1910,15 @@
                 min-height: 0;
                 overflow-y: auto !important;
                 -webkit-overflow-scrolling: touch;
+                padding-bottom: 8px;
             }
 
             .chat-input-area {
-                padding: 10px 12px 12px 12px;
+                padding: 8px 12px;
                 padding-bottom: max(12px, env(safe-area-inset-bottom));
                 flex-shrink: 0;
+                position: relative;
+                z-index: 10;
             }
         }
 
@@ -1940,11 +1951,18 @@
 
             .message-content { max-width: 92%; }
             .chat-header { font-size: 0.82em; padding: 10px 12px; }
-            #messageInput { padding: 10px 12px; }
+            
+            #messageInput { 
+                padding: 12px 12px; 
+                font-size: 16px;
+                border-radius: 18px;
+                min-height: 44px;
+            }
 
             .btn-send, .btn-clear {
-                padding: 9px 12px;
+                padding: 10px 12px;
                 font-size: 0.82em;
+                min-height: 44px;
             }
 
             body {
@@ -1981,9 +1999,11 @@
             }
 
             .chat-input-area {
-                padding: 10px 12px 12px 12px;
+                padding: 8px 12px;
                 padding-bottom: max(12px, env(safe-area-inset-bottom));
                 flex-shrink: 0;
+                position: relative;
+                z-index: 10;
             }
         }
     </style>

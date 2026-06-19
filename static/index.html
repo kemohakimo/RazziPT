@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RazziPT</title>
+    <script>
+        // Early theme initialization - runs before page renders to prevent flash
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            let shouldBeDark = false;
+            if (savedTheme === 'dark') {
+                shouldBeDark = true;
+            } else if (savedTheme === 'light') {
+                shouldBeDark = false;
+            } else if (prefersDark) {
+                shouldBeDark = true;
+            }
+            
+            if (shouldBeDark) {
+                document.documentElement.classList.add('dark-mode');
+                document.documentElement.style.colorScheme = 'dark';
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+    <!-- Theme Toggle Button -->
+    <div class="theme-toggle">
+        <button class="toggle-btn" id="themeToggle" title="Toggle Light/Dark Mode">
+            🌙
+        </button>
+    </div>
+
+    <div class="app-shell">
+        <header>
+            <div class="header-logo-section">
+                <img src="/static/logo.png" alt="RazziPT Logo" class="main-header-logo">
+            </div>
+            <div class="hero-badge">Premium AI Workspace</div>
+            <h1>Meet RazziPT</h1>
+            <p class="slogan">Your AI assistant for learning, programming, and productivity.</p>
+            <p>Experience a polished chat interface with personality modes, memory, and a smarter feel from the very first message.</p>
+            <div class="button-row" style="justify-content:center; margin-top:18px;">
+                <button id="startBtn" onclick="window.location.href='/signin'">Start Chatting</button>
+                <button id="learnBtn" class="secondary" onclick="window.location.href='/about-us'">Learn More</button>
+            </div>
+        </header>
+        <main>
+            <div class="chat-panel" id="chatPanel"></div>
+            <div class="controls">
+                <select id="modeSelect">
+                    <option value="rude">Rude</option>
+                    <option value="rude_plus">Rude+</option>
+                    <option value="razzi">Razzi (Final Boss)</option>
+                </select>
+                <textarea id="messageInput" placeholder="Type your message..." rows="3"></textarea>
+                <div class="button-row">
+                    <button id="sendBtn">Send</button>
+                    <button id="clearBtn" class="secondary">Clear Memory</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/static/app.js"></script>
+    <script src="/static/theme.js"></script>
+</body>
+</html>

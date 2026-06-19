@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - RazziPT</title>
+    <script>
+        // Early theme initialization - runs before page renders to prevent flash
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            let shouldBeDark = false;
+            if (savedTheme === 'dark') {
+                shouldBeDark = true;
+            } else if (savedTheme === 'light') {
+                shouldBeDark = false;
+            } else if (prefersDark) {
+                shouldBeDark = true;
+            }
+            
+            if (shouldBeDark) {
+                document.documentElement.classList.add('dark-mode');
+                document.documentElement.style.colorScheme = 'dark';
+            }
+        })();
+    </script>
+    <style>
+        /* CSS Variables for Theme */
+        :root {
+            --bg-primary: #ffffff;
+            --text-primary: #1a1a2e;
+            --text-secondary: #666;
+            --border-color: #eee;
+            --input-bg: #f8f9fa;
+            --container-shadow: rgba(0, 0, 0, 0.3);
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-gradient: linear-gradient(135deg, #00d4ff 0%, #0099ff 100%);
+            --success-gradient: linear-gradient(135deg, #00d084 0%, #00a86b 100%);
+        }
+
+        body.dark-mode {
+            --bg-primary: #0f0f1e;
+            --text-primary: #e4e4e7;
+            --text-secondary: #a1a1a1;
+            --border-color: #333;
+            --input-bg: #1a1a2e;
+            --container-shadow: rgba(0, 0, 0, 0.5);
+            --primary-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --accent-gradient: linear-gradient(135deg, #0f3460 0%, #1a5c7a 100%);
+            --success-gradient: linear-gradient(135deg, #2d4059 0%, #3d5a73 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary-gradient);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            transition: background 0.4s ease, color 0.4s ease;
+            color: var(--text-primary);
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .toggle-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            font-size: 28px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
+        }
+
+        .toggle-btn:active {
+            transform: scale(0.95);
+        }
+
+        body.dark-mode .toggle-btn {
+            background: rgba(100, 100, 100, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .container {
+            background: var(--bg-primary);
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px var(--container-shadow);
+            max-width: 450px;
+            width: 100%;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body.dark-mode .container {
+            background: #111827;
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+        }
+
+        .logo-section {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .container-logo {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+            transition: transform 0.3s ease;
+        }
+
+        .container-logo:hover {
+            transform: scale(1.05);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2em;
+            font-weight: 800;
+            color: #5B3A9E;
+            transition: all 0.4s ease;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        body.dark-mode h1 {
+            color: #00d4ff;
+        }
+
+        .slogan {
+            font-size: 1.1em;
+            font-weight: 700;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 12px auto 18px;
+            letter-spacing: 0.5px;
+            text-align: center;
+            display: block;
+        }
+
+        body.dark-mode .slogan {
+            -webkit-text-fill-color: #0099ff;
+            background: none;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-weight: 500;
+            transition: color 0.4s ease;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1em;
+            background: var(--input-bg);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: var(--accent-gradient);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        body.dark-mode input:focus {
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+        
+        .message {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.4s ease;
+        }
+        
+        .message.error {
+            background: rgba(255, 0, 0, 0.1);
+            color: #ff6b6b;
+            display: block;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+        
+        .message.success {
+            background: rgba(0, 200, 100, 0.1);
+            color: #00d084;
+            display: block;
+            border: 1px solid rgba(0, 200, 100, 0.3);
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        
+        .forgot-password a {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .forgot-password a {
+            -webkit-text-fill-color: #0099ff;
+            background: none;
+        }
+        
+        .forgot-password a:hover {
+            opacity: 0.8;
+        }
+        
+        .btn-signin {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-signin::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-gradient);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn-signin:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px var(--container-shadow);
+        }
+
+        .btn-signin:hover::before {
+            left: 0;
+        }
+
+        .btn-signin:active {
+            transform: translateY(0);
+        }
+        
+        .link-signup {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-secondary);
+            transition: color 0.4s ease;
+        }
+        
+        .link-signup a {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .link-signup a {
+            -webkit-text-fill-color: #0099ff;
+            background: none;
+        }
+        
+        .link-signup a:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 25px;
+            }
+
+            .toggle-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle Button -->
+    <div class="theme-toggle">
+        <button class="toggle-btn" id="themeToggle" title="Toggle Light/Dark Mode">
+            🌙
+        </button>
+    </div>
+
+    <div class="container">
+        <div class="logo-section">
+            <img src="/static/logo.png" alt="RazziPT Logo" class="container-logo">
+        </div>
+        <h1>Welcome to RazziPT</h1>
+        <p class="slogan">✨ A Woman Who's Always Right! ✨</p>
+        <p class="subtitle">Sign in to your account</p>
+        <div id="message" class="message"></div>
+        
+        <form id="signinForm">
+            <div class="form-group">
+                <label for="email">Gmail/Email *</label>
+                <input type="email" id="email" required placeholder="your.email@gmail.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password *</label>
+                <input type="password" id="password" required placeholder="Enter your password">
+            </div>
+            
+            <div class="forgot-password">
+                <a onclick="window.location.href='/forgot-password'">Forgot Password?</a>
+            </div>
+            
+            <button type="submit" class="btn-signin">Sign In</button>
+        </form>
+        
+        <div class="link-signup">
+            Don't have an account? <a onclick="window.location.href='/signup'">Sign Up</a>
+        </div>
+    </div>
+    
+    <script src="/static/theme.js"></script>
+    <script>
+        const form = document.getElementById('signinForm');
+        const messageDiv = document.getElementById('message');
+        
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    showMessage('Login successful! Redirecting...', 'success');
+                    setTimeout(() => {
+                        window.location.href = data.redirect || '/chat';
+                    }, 500);
+                } else {
+                    showMessage(data.message, 'error');
+                }
+            } catch (error) {
+                showMessage('Error: ' + error.message, 'error');
+            }
+        });
+        
+        function showMessage(text, type) {
+            messageDiv.textContent = text;
+            messageDiv.className = 'message ' + type;
+        }
+    </script>
+</body>
+</html>

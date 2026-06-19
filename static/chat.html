@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>RazziPT Chat</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1038,6 +1038,7 @@
         .chat-input-area {
             background: linear-gradient(180deg, rgba(255,255,255,0.84), rgba(248,250,252,0.96));
             padding: 15px 16px 18px;
+            padding-bottom: max(18px, env(safe-area-inset-bottom));
             border-top: 1px solid var(--border);
             display: flex;
             gap: 12px;
@@ -1838,6 +1839,7 @@
             /* Input area */
             .chat-input-area {
                 padding: 10px 12px 12px 12px;
+                padding-bottom: max(12px, env(safe-area-inset-bottom));
                 gap: 8px;
             }
 
@@ -1903,6 +1905,7 @@
 
             .chat-input-area {
                 padding: 10px 12px 12px 12px;
+                padding-bottom: max(12px, env(safe-area-inset-bottom));
                 flex-shrink: 0;
             }
         }
@@ -1977,6 +1980,7 @@
 
             .chat-input-area {
                 padding: 10px 12px 12px 12px;
+                padding-bottom: max(12px, env(safe-area-inset-bottom));
                 flex-shrink: 0;
             }
         }
@@ -3023,6 +3027,13 @@
             if (e.key === 'Enter') {
                 sendMessage();
             }
+        });
+
+        // Mobile fix: Ensure input is visible when focused (scrolls above keyboard/nav buttons)
+        document.getElementById('messageInput').addEventListener('focus', function() {
+            setTimeout(() => {
+                this.scrollIntoView({ behavior: 'smooth', block: 'end' });
+            }, 300);
         });
         
         // Load user on page load

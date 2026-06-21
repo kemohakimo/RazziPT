@@ -1832,10 +1832,11 @@
 
             /* Chat header */
             .chat-header {
-                padding: 12px 14px;
-                padding-top: max(12px, env(safe-area-inset-top));
-                font-size: 0.88em;
+                padding: 8px 10px;
+                padding-top: max(8px, env(safe-area-inset-top));
+                font-size: 0.85em;
                 flex-shrink: 0;
+                line-height: 1.2;
             }
 
             /* Messages */
@@ -1849,9 +1850,9 @@
 
             /* Input area - improved mobile handling */
             .chat-input-area {
-                padding: 8px 12px;
-                padding-bottom: max(12px, env(safe-area-inset-bottom));
-                gap: 8px;
+                padding: 6px 10px;
+                padding-bottom: max(8px, env(safe-area-inset-bottom));
+                gap: 6px;
                 flex-shrink: 0;
                 position: sticky;
                 bottom: 0;
@@ -1860,25 +1861,25 @@
             }
 
             .input-row { 
-                gap: 8px;
+                gap: 6px;
                 display: flex;
                 align-items: stretch;
             }
 
             #messageInput {
-                padding: 12px 14px;
-                font-size: 16px;
-                border-radius: 20px;
-                min-height: 44px;
+                padding: 10px 12px;
+                font-size: 15px;
+                border-radius: 18px;
+                min-height: 40px;
                 flex: 1;
                 flex-shrink: 1;
             }
 
             .btn-send, .btn-clear {
-                padding: 11px 16px;
-                font-size: 0.9em;
+                padding: 9px 14px;
+                font-size: 0.88em;
                 border-radius: 14px;
-                min-height: 44px;
+                min-height: 40px;
                 flex-shrink: 0;
             }
 
@@ -1974,23 +1975,32 @@
 
             .message-content { max-width: 92%; }
             .chat-header { 
-                font-size: 0.82em; 
-                padding: 10px 12px; 
-                padding-top: max(10px, env(safe-area-inset-top));
+                font-size: 0.72em; 
+                padding: 6px 8px; 
+                padding-top: max(4px, env(safe-area-inset-top));
                 flex-shrink: 0;
+                line-height: 1.2;
+            }
+            
+            .chat-header-inner {
+                gap: 2px;
+            }
+            
+            .controls {
+                display: none !important;
             }
             
             #messageInput { 
-                padding: 8px 10px; 
-                font-size: 16px;
-                border-radius: 16px;
-                min-height: 38px;
+                padding: 6px 8px; 
+                font-size: 15px;
+                border-radius: 14px;
+                min-height: 36px;
             }
 
             .btn-send, .btn-clear {
-                padding: 8px 10px;
-                font-size: 0.78em;
-                min-height: 38px;
+                padding: 6px 8px;
+                font-size: 0.75em;
+                min-height: 36px;
                 flex-shrink: 0;
             }
 
@@ -2032,14 +2042,14 @@
             }
 
             .chat-input-area {
-                padding: 3px 8px;
-                padding-bottom: max(4px, env(safe-area-inset-bottom));
+                padding: 2px 6px;
+                padding-bottom: max(2px, env(safe-area-inset-bottom));
                 flex-shrink: 0;
                 position: sticky;
                 bottom: 0;
                 z-index: 50;
                 border-top: 1px solid var(--border);
-                gap: 4px;
+                gap: 2px;
             }
         }
     </style>

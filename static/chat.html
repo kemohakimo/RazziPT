@@ -186,6 +186,7 @@
             transition: all 0.35s ease;
             backdrop-filter: blur(18px);
             box-shadow: var(--shadow);
+            flex-shrink: 0;
         }
 
         body.dark-mode .header {
@@ -1759,6 +1760,9 @@
                 border-radius: 16px;
                 gap: 6px;
                 flex-shrink: 0;
+                position: sticky;
+                top: 0;
+                z-index: 50;
             }
 
             .header-left { gap: 8px; }
@@ -1849,8 +1853,9 @@
                 padding-bottom: max(12px, env(safe-area-inset-bottom));
                 gap: 8px;
                 flex-shrink: 0;
-                position: relative;
-                z-index: 10;
+                position: sticky;
+                bottom: 0;
+                z-index: 50;
                 border-top: 1px solid var(--border);
             }
 
@@ -1942,6 +1947,10 @@
                 margin: 5px 5px 0;
                 padding: 8px 10px;
                 padding-top: max(8px, env(safe-area-inset-top));
+                position: sticky;
+                top: 0;
+                z-index: 50;
+                flex-shrink: 0;
             }
 
             .mobile-toggle-btn {
@@ -1994,6 +2003,9 @@
 
             .header {
                 flex-shrink: 0;
+                position: sticky;
+                top: 0;
+                z-index: 50;
             }
 
             .main-container {
@@ -2020,12 +2032,14 @@
             }
 
             .chat-input-area {
-                padding: 8px 12px;
-                padding-bottom: max(12px, env(safe-area-inset-bottom));
+                padding: 6px 10px;
+                padding-bottom: max(8px, env(safe-area-inset-bottom));
                 flex-shrink: 0;
-                position: relative;
-                z-index: 10;
+                position: sticky;
+                bottom: 0;
+                z-index: 50;
                 border-top: 1px solid var(--border);
+                gap: 6px;
             }
         }
     </style>

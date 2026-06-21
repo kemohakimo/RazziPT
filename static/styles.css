@@ -393,4 +393,14 @@ body.dark-mode button.secondary {
         height: 45px;
         font-size: 20px;
     }
+
+    .welcome-screen {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 20px;
+    }
+
+    .welcome-screen > div:first-child {
+        margin-top: 20px;
+    }
 }

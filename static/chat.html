@@ -78,10 +78,13 @@
                 linear-gradient(135deg, var(--bg) 0%, #EEF2FF 100%);
             display: flex;
             flex-direction: column;
-            height: 100vh;
+            min-height: 100dvh;
+            height: 100dvh;
             overflow: hidden;
             color: var(--text);
             transition: background 0.4s ease, color 0.4s ease;
+            overscroll-behavior: none;
+            -webkit-font-smoothing: antialiased;
         }
 
         body.dark-mode {
@@ -762,29 +765,33 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            background: var(--surface);
+            background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(248,250,252,0.98));
             border-radius: 28px;
-            box-shadow: var(--shadow);
+            box-shadow: 0 22px 44px rgba(15, 23, 42, 0.12);
             overflow: hidden;
-            border: 1px solid var(--border);
+            border: 1px solid rgba(79, 70, 229, 0.16);
             transition: all 0.35s ease;
             backdrop-filter: blur(18px);
+            min-height: 0;
         }
 
         body.dark-mode .chat-container {
+            background: linear-gradient(180deg, rgba(17,24,39,0.96), rgba(15,23,42,0.98));
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            border-color: rgba(99, 102, 241, 0.24);
         }
         
         .chat-header {
-            background: linear-gradient(135deg, rgba(79,70,229,0.98), rgba(139,92,246,0.96));
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 50%, #8B5CF6 100%);
             color: #fff;
-            padding: 18px 20px;
+            padding: 16px 18px;
             text-align: center;
             font-weight: 700;
-            font-size: 1.05em;
+            font-size: 1.02em;
             transition: all 0.35s ease;
             letter-spacing: 0.2px;
-            box-shadow: inset 0 -1px 0 rgba(255,255,255,0.12);
+            box-shadow: 0 8px 24px rgba(79, 70, 229, 0.24);
+            border-bottom: 1px solid rgba(255,255,255,0.16);
         }
 
         .chat-header-inner {
@@ -818,12 +825,16 @@
         
         .chat-history {
             flex: 1;
+            min-height: 0;
             overflow-y: auto;
-            padding: 18px;
+            padding: 18px 18px 24px;
             background:
-                radial-gradient(circle at top, rgba(99, 102, 241, 0.08), transparent 18%),
-                linear-gradient(135deg, rgba(255,255,255,0.25), rgba(248,250,252,0.95));
+                radial-gradient(circle at top, rgba(99, 102, 241, 0.09), transparent 18%),
+                linear-gradient(135deg, rgba(255,255,255,0.4), rgba(248,250,252,0.96));
             transition: background 0.35s ease;
+            scroll-behavior: smooth;
+            overscroll-behavior: contain;
+            scroll-padding-bottom: 140px;
         }
 
         body.dark-mode .chat-history {
@@ -884,7 +895,8 @@
             display: inline-block;
             padding: 14px 16px;
             border-radius: 20px;
-            max-width: 78%;
+            max-width: min(82%, 640px);
+            width: fit-content;
             word-wrap: break-word;
             transition: all 0.35s ease;
             line-height: 1.6;
@@ -966,9 +978,9 @@
         }
         
         .message.user .message-content {
-            background: var(--message-user-bg);
-            color: var(--message-user-text);
-            box-shadow: 0 14px 30px rgba(79, 70, 229, 0.25);
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+            color: #F8FAFC;
+            box-shadow: 0 14px 30px rgba(79, 70, 229, 0.24);
             text-align: left;
         }
 
@@ -977,10 +989,10 @@
         }
         
         .message.assistant .message-content {
-            background: var(--message-assistant-bg);
+            background: rgba(255,255,255,0.94);
             color: var(--message-assistant-text);
             box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
-            border: 1px solid var(--border);
+            border: 1px solid rgba(79, 70, 229, 0.12);
         }
 
         body.dark-mode .message.assistant .message-content {
@@ -1037,19 +1049,20 @@
         }
         
         .chat-input-area {
-            background: linear-gradient(180deg, rgba(255,255,255,0.84), rgba(248,250,252,0.96));
-            padding: 15px 16px 18px;
-            padding-bottom: max(18px, env(safe-area-inset-bottom));
-            border-top: 1px solid var(--border);
+            background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,250,252,0.98));
+            padding: 14px 16px max(16px, env(safe-area-inset-bottom));
+            border-top: 1px solid rgba(79, 70, 229, 0.12);
             display: flex;
             gap: 12px;
             flex-direction: column;
             transition: all 0.35s ease;
             backdrop-filter: blur(16px);
+            box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.05);
         }
 
         body.dark-mode .chat-input-area {
             background: linear-gradient(180deg, rgba(17,24,39,0.96), rgba(15,23,42,0.98));
+            box-shadow: 0 -8px 24px rgba(2, 6, 23, 0.25);
         }
         
         .controls {
@@ -1281,10 +1294,11 @@
         #messageInput {
             flex: 1;
             padding: 14px 16px;
-            border: 1px solid var(--border);
+            border: 1px solid rgba(79, 70, 229, 0.16);
             border-radius: 24px;
             font-size: 1em;
-            background: rgba(255,255,255,0.88);
+            min-height: 48px;
+            background: rgba(255,255,255,0.94);
             color: var(--text);
             transition: all 0.25s ease;
             font-family: 'Inter', 'Segoe UI', sans-serif;
@@ -1310,7 +1324,8 @@
         }
         
         .btn-send, .btn-clear {
-            padding: 12px 18px;
+            padding: 12px 16px;
+            min-height: 48px;
             background: var(--primary-gradient);
             color: #fff;
             border: none;
@@ -1590,16 +1605,21 @@
 
         /* Mobile drawer overlay */
         .mobile-overlay {
-            display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.52);
+            background: rgba(2, 6, 23, 0.48);
             z-index: 200;
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.28s ease;
         }
 
-        .mobile-overlay.active { display: block; }
+        .mobile-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
 
         /* Mobile sidebar toggle buttons (hidden on desktop) */
         .mobile-toggle-btn {
@@ -1729,6 +1749,12 @@
 
         /* ---- Mobile (\u2264 640px): drawer mode ---- */
         @media (max-width: 640px) {
+            body {
+                height: 100dvh;
+                overflow: hidden;
+                padding: 0;
+            }
+
             .mobile-toggle-btn {
                 display: flex;
                 border: 1.5px solid rgba(79,70,229,0.25);
@@ -1790,8 +1816,8 @@
             /* Main container */
             .main-container {
                 padding: 8px;
-                gap: 0;
-                overflow: visible;
+                gap: 8px;
+                overflow: hidden;
             }
 
             /* Both sidebars become fixed slide-in drawers */
@@ -1800,16 +1826,19 @@
                 left: 0;
                 top: 0;
                 bottom: 0;
-                width: min(82vw, 300px) !important;
+                width: min(84vw, 320px) !important;
                 z-index: 300;
-                border-radius: 0 20px 20px 0 !important;
-                transform: translateX(-105%);
-                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                border-radius: 0 22px 22px 0 !important;
+                transform: translateX(-110%);
+                transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.32s ease;
                 overflow-y: auto;
+                box-shadow: 0 24px 70px rgba(15, 23, 42, 0.2);
+                will-change: transform;
             }
 
             .chat-sidebar.drawer-open {
                 transform: translateX(0);
+                box-shadow: 0 24px 80px rgba(15, 23, 42, 0.28);
             }
 
             .mode-sidebar {
@@ -1817,74 +1846,80 @@
                 right: 0;
                 top: 0;
                 bottom: 0;
-                width: min(82vw, 280px) !important;
+                width: min(84vw, 300px) !important;
                 z-index: 300;
-                border-radius: 20px 0 0 20px !important;
-                transform: translateX(105%);
-                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                border-radius: 22px 0 0 22px !important;
+                transform: translateX(110%);
+                transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.32s ease;
                 overflow-y: auto;
+                box-shadow: 0 24px 70px rgba(15, 23, 42, 0.2);
+                will-change: transform;
             }
 
             .mode-sidebar.drawer-open {
                 transform: translateX(0);
+                box-shadow: 0 24px 80px rgba(15, 23, 42, 0.28);
             }
 
             /* Chat container fills full width */
-            .chat-container { border-radius: 16px; }
+            .chat-container {
+                border-radius: 18px;
+                min-height: 0;
+            }
 
             /* Chat header */
             .chat-header {
-                padding: 8px 10px;
-                padding-top: max(8px, env(safe-area-inset-top));
-                font-size: 0.85em;
+                padding: 10px 12px;
+                padding-top: max(10px, env(safe-area-inset-top));
+                font-size: 0.9em;
                 flex-shrink: 0;
-                line-height: 1.2;
+                line-height: 1.25;
                 position: sticky;
                 top: 0;
                 z-index: 10;
             }
 
             /* Messages */
-            .message-content { max-width: 88%; }
+            .message-content { max-width: min(92%, 100%); }
 
             /* Chat history */
             .chat-history { 
-                padding: 12px;
-                padding-bottom: 16px;
+                padding: 12px 12px 20px;
+                padding-bottom: 20px;
             }
 
             /* Input area - improved mobile handling */
             .chat-input-area {
-                padding: 6px 10px;
-                padding-bottom: max(8px, env(safe-area-inset-bottom));
-                gap: 6px;
+                padding: 8px 10px max(12px, env(safe-area-inset-bottom));
+                gap: 8px;
                 flex-shrink: 0;
                 position: sticky;
                 bottom: 0;
                 z-index: 50;
-                border-top: 1px solid var(--border);
+                border-top: 1px solid rgba(79, 70, 229, 0.12);
+                box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.05);
             }
 
             .input-row { 
-                gap: 6px;
+                gap: 8px;
                 display: flex;
                 align-items: stretch;
             }
 
             #messageInput {
-                padding: 10px 12px;
-                font-size: 15px;
+                padding: 12px 14px;
+                font-size: 16px;
                 border-radius: 18px;
-                min-height: 40px;
+                min-height: 46px;
                 flex: 1;
                 flex-shrink: 1;
             }
 
             .btn-send, .btn-clear {
-                padding: 9px 14px;
+                padding: 10px 14px;
                 font-size: 0.88em;
                 border-radius: 14px;
-                min-height: 40px;
+                min-height: 46px;
                 flex-shrink: 0;
             }
 
@@ -1978,17 +2013,17 @@
                 font-size: 0.75em;
             }
 
-            .message-content { max-width: 92%; }
+            .message-content { max-width: 100%; }
             .chat-header { 
-                font-size: 0.72em; 
-                padding: 6px 8px; 
-                padding-top: max(4px, env(safe-area-inset-top));
+                font-size: 0.8em; 
+                padding: 8px 10px; 
+                padding-top: max(8px, env(safe-area-inset-top));
                 flex-shrink: 0;
-                line-height: 1.2;
+                line-height: 1.25;
                 position: sticky;
                 top: calc(env(safe-area-inset-top) + 52px);
                 z-index: 60;
-                background: rgba(255, 255, 255, 0.88);
+                background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
                 backdrop-filter: blur(12px);
             }
             
@@ -2001,16 +2036,16 @@
             }
             
             #messageInput { 
-                padding: 6px 8px; 
+                padding: 10px 12px; 
                 font-size: 15px;
                 border-radius: 14px;
-                min-height: 36px;
+                min-height: 42px;
             }
 
             .btn-send, .btn-clear {
-                padding: 6px 8px;
-                font-size: 0.75em;
-                min-height: 36px;
+                padding: 8px 10px;
+                font-size: 0.8em;
+                min-height: 42px;
                 flex-shrink: 0;
             }
 
@@ -2055,16 +2090,16 @@
             }
 
             .chat-input-area {
-                padding: 6px 8px;
-                padding-bottom: max(14px, calc(env(safe-area-inset-bottom) + 10px));
+                padding: 8px 10px max(14px, calc(env(safe-area-inset-bottom) + 10px));
                 flex-shrink: 0;
                 position: sticky;
                 bottom: 0;
                 z-index: 80;
-                border-top: 1px solid var(--border);
-                gap: 6px;
-                background: rgba(255, 255, 255, 0.92);
+                border-top: 1px solid rgba(79, 70, 229, 0.12);
+                gap: 8px;
+                background: rgba(255, 255, 255, 0.96);
                 backdrop-filter: blur(14px);
+                box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.05);
             }
         }
     </style>
@@ -3134,15 +3169,23 @@
                 chatSidebar && chatSidebar.classList.remove('drawer-open');
                 modeSidebar && modeSidebar.classList.remove('drawer-open');
                 overlay && overlay.classList.remove('active');
+                document.body.classList.remove('drawer-open');
+            }
+
+            function openDrawer(drawer) {
+                closeAll();
+                drawer.classList.add('drawer-open');
+                overlay && overlay.classList.add('active');
+                document.body.classList.add('drawer-open');
             }
 
             if (chatToggle && chatSidebar) {
                 chatToggle.addEventListener('click', function () {
                     const isOpen = chatSidebar.classList.contains('drawer-open');
-                    closeAll();
-                    if (!isOpen) {
-                        chatSidebar.classList.add('drawer-open');
-                        overlay.classList.add('active');
+                    if (isOpen) {
+                        closeAll();
+                    } else {
+                        openDrawer(chatSidebar);
                     }
                 });
             }
@@ -3150,10 +3193,10 @@
             if (modeToggle && modeSidebar) {
                 modeToggle.addEventListener('click', function () {
                     const isOpen = modeSidebar.classList.contains('drawer-open');
-                    closeAll();
-                    if (!isOpen) {
-                        modeSidebar.classList.add('drawer-open');
-                        overlay.classList.add('active');
+                    if (isOpen) {
+                        closeAll();
+                    } else {
+                        openDrawer(modeSidebar);
                     }
                 });
             }
@@ -3161,6 +3204,12 @@
             if (overlay) {
                 overlay.addEventListener('click', closeAll);
             }
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') {
+                    closeAll();
+                }
+            });
 
             // Close drawers when window grows past mobile breakpoint
             window.matchMedia('(min-width: 641px)').addEventListener('change', function (e) {
